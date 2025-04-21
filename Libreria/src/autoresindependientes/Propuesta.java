@@ -1,25 +1,29 @@
 package autoresindependientes;
 
-public class Libro {
+public class Propuesta {
 
     private int id;
     private String titulo;
     private String descripcion;
-    private double precio;
+    private EstadoPropuesta estado; 
     private String genero;
-    private int cantidadPaginas;
+    private int cantidadPaginas; 
     private Autor autor;
 
+    public enum EstadoPropuesta {
+        EN_REVISION,
+        ACEPTADA,
+        RECHAZADA
+    }
 
-    
-    public Libro(int id, String titulo, String descripcion, double precio, String genero, int cantidadPaginas, Autor autor) {
+    public Propuesta(int id, String titulo, String descripcion, String genero, int cantidadPaginas, Autor autor) {
         this.id = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
-        this.precio = precio;
         this.genero = genero;
         this.cantidadPaginas = cantidadPaginas;
         this.autor = autor;
+        this.estado = EstadoPropuesta.EN_REVISION;
     }
 
     public int getId() {
@@ -46,16 +50,12 @@ public class Libro {
         this.descripcion = descripcion;
     }
 
-    public double getPrecio() {
-        return precio;
+    public EstadoPropuesta getEstado() {
+        return estado;
     }
 
-    public void setPrecio(double precio) {
-        if (precio >= 0) {
-            this.precio = precio;
-        } else {
-            System.out.println("El precio debe ser positivo.");
-        }
+    public void setEstado(EstadoPropuesta estado) {
+        this.estado = estado;
     }
 
     public String getGenero() {
@@ -86,10 +86,9 @@ public class Libro {
         this.autor = autor;
     }
 
-
     @Override
     public String toString() {
-        return "Libro [id=" + id + ", titulo=" + titulo + ", descripcion=" + descripcion + ", precio=" + precio
+        return "Propuesta [id=" + id + ", titulo=" + titulo + ", descripcion=" + descripcion + ", estado=" + estado
                 + ", genero=" + genero + ", cantidadPaginas=" + cantidadPaginas + ", autor=" + autor + "]";
     }
 }
