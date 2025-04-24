@@ -1,12 +1,12 @@
 package autoresindependientes;
 
 public abstract class Usuario {
-	
+
 	private int id;
 	private String name;
 	private String email;
 	private String password;
-	
+
 	public Usuario(int id, String name, String email, String password) {
 		this.id = id;
 		this.name = name;
@@ -48,15 +48,15 @@ public abstract class Usuario {
 
 	@Override
 	public String toString() {
-	    return "Usuario [id=" + id + ", name=" + name + ", email=" + email + "]";
+		return "Usuario [id=" + id + ", name=" + name + ", email=" + email + "]";
 	}
 
 	public void subirPropuesta(Propuesta propuesta) {
 
-    }
+	}
 
-    public void verEstadoPropuesta(int idPropuesta) {
-        
-    }
-	
+	public void verEstadoPropuesta(int idPropuesta) {
+
+	}
+
 }
