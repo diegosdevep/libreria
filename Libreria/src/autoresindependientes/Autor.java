@@ -1,7 +1,6 @@
 package autoresindependientes;
 
 import java.util.LinkedList;
-import javax.swing.JOptionPane;
 
 public class Autor extends Usuario {
 
