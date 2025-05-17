@@ -4,34 +4,33 @@ import java.util.LinkedList;
 
 public class Autor extends Usuario {
 
-	private String generoQueEscribe;
-	private LinkedList<Propuesta> propuestas;
+    private String generoAutor;
+    private LinkedList<Propuesta> propuestas;
 
-	public Autor(int id, String name, String email, String password, String genero) {
-		super(id, name, email, password);
-		this.generoQueEscribe = genero;
-	}
+    public Autor(int id, String name, String email, String password, String generoAutor) {
+        super(id, name, email, password, "autor");
+        this.generoAutor = generoAutor;
+        this.propuestas = new LinkedList<>();
+    }
 
-	public String getGeneroQueEscribe() {
-		return generoQueEscribe;
-	}
+    public String getGeneroQueEscribe() {
+        return generoAutor;
+    }
 
-	public void setGeneroQueEscribe(String generoQueEscribe) {
-		this.generoQueEscribe = generoQueEscribe;
-	}
+    public void setGeneroQueEscribe(String generoQueEscribe) {
+        this.generoAutor = generoQueEscribe;
+    }
 
-	public void cargarPropuesta(Propuesta propuesta) {
+    public LinkedList<Propuesta> getPropuestas() {
+        return propuestas;
+    }
 
-	}
+    public void cargarPropuesta(Propuesta propuesta) {
+        // lógica aquí
+    }
 
-	public LinkedList<Propuesta> getPropuestas() {
-		return propuestas;
-	}
-
-	@Override
-	public String toString() {
-		return super.toString() + ", Autor [género que escribe=" + generoQueEscribe + ", propuestas=" + propuestas
-				+ "]";
-	}
-
+    @Override
+    public String toString() {
+        return super.toString() + ", Autor [género que escribe=" + generoAutor + "]";
+    }
 }
