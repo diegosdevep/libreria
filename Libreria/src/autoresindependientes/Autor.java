@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class Autor extends Usuario {
 
-    private String generoAutor;
+    private String generoAutor;  // Puede ser varios géneros separados por coma
     private LinkedList<Propuesta> propuestas;
 
     public Autor(int id, String name, String email, String password, String generoAutor) {

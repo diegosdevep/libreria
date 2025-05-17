@@ -1,14 +1,58 @@
 package autoresindependientes;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
+
+    // Método para selección múltiple de géneros con JCheckBox dentro de JOptionPane
+    private static List<String> seleccionarGeneros(List<String> generosDisponibles) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        List<JCheckBox> checkBoxes = new ArrayList<>();
+        for (String genero : generosDisponibles) {
+            JCheckBox checkBox = new JCheckBox(genero);
+            checkBoxes.add(checkBox);
+            panel.add(checkBox);
+        }
+
+        int result = JOptionPane.showConfirmDialog(null, panel, "Seleccione géneros",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        List<String> generosSeleccionados = new ArrayList<>();
+        if (result == JOptionPane.OK_OPTION) {
+            for (JCheckBox checkBox : checkBoxes) {
+                if (checkBox.isSelected()) {
+                    generosSeleccionados.add(checkBox.getText());
+                }
+            }
+        }
+        return generosSeleccionados;
+    }
 
     public static void main(String[] args) {
         String[] opcionesInicio = {"Iniciar sesión", "Registrarse", "Salir"};
         String[] opcionesAutor = {"Subir propuesta", "Ver estado propuesta", "Salir"};
         String[] opcionesEditor = {"Revisar propuestas", "Cambiar estado", "Salir"};
         String[] opcionesDueno = {"Modificar precios", "Ver estadísticas", "Salir"};
+
+        List<String> generosDisponibles = List.of(
+        	    "Ficcion",
+        	    "No Ficcion",
+        	    "Misterio",
+        	    "Romance",
+        	    "Ciencia Ficcion",
+        	    "Fantasia",
+        	    "Terror",
+        	    "Historico",
+        	    "Aventura",
+        	    "Drama",
+        	    "Thriller",
+        	    "Biografia"
+        	);
+
 
         while (true) {
             int opcion = JOptionPane.showOptionDialog(null, "Seleccione una opción:", "Bienvenido",
@@ -29,8 +73,14 @@ public class Main {
 
                 switch (rol) {
                     case "autor":
-                        String genero = JOptionPane.showInputDialog("¿Qué género literario escribe?");
-                        nuevo = new Autor(0, nombre, email, password, genero);
+                        List<String> generosSeleccionados = seleccionarGeneros(generosDisponibles);
+                        if (generosSeleccionados.isEmpty()) {
+                            JOptionPane.showMessageDialog(null, "Debe seleccionar al menos un género.");
+                            continue;
+                        }
+                        String generoConcat = String.join(",", generosSeleccionados);
+
+                        nuevo = new Autor(0, nombre, email, password, generoConcat);
                         break;
                     case "editor":
                         nuevo = new Editor(0, nombre, email, password);

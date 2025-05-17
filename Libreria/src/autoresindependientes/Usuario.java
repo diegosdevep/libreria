@@ -46,15 +46,13 @@ public abstract class Usuario implements Encriptador {
     private static Connection con = Conexion.getInstance().getConnection();
 
     public static Usuario login(String email, String password) {
-    	Usuario usuario = null;
-    	try {
+        Usuario usuario = null;
+        try {
             PreparedStatement stmt = con.prepareStatement(
                 "SELECT * FROM usuarios WHERE email = ? AND password = ?"
             );
             stmt.setString(1, email);
             stmt.setString(2, Encriptador.encriptar(password));
-
-
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
@@ -65,7 +63,7 @@ public abstract class Usuario implements Encriptador {
 
                 switch (rol) {
                     case "autor":
-                        String genero = rs.getString("genero_autor");
+                        String genero = rs.getString("genero_autor");  // guardado como "Ficción,Romance"
                         usuario = new Autor(id, nombre, email, pass, genero);
                         break;
                     case "editor":
@@ -76,6 +74,7 @@ public abstract class Usuario implements Encriptador {
                         break;
                 }
             }
+            stmt.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -97,11 +96,11 @@ public abstract class Usuario implements Encriptador {
             if (filas > 0) {
                 System.out.println("Usuario agregado correctamente.");
             }
+            statement.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 
     public static void RegistrarUsuario(Usuario nuevo) {
         LinkedList<Usuario> existentes = mostrarUsuarios();
@@ -134,7 +133,7 @@ public abstract class Usuario implements Encriptador {
 
                 switch (rol) {
                     case "autor":
-                    	String genero = rs.getString("genero_autor");
+                        String genero = rs.getString("genero_autor");
                         usuarios.add(new Autor(id, name, email, password, genero));
                         break;
                     case "editor":
@@ -145,6 +144,7 @@ public abstract class Usuario implements Encriptador {
                         break;
                 }
             }
+            stmt.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
