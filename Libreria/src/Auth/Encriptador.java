@@ -1,13 +1,12 @@
-package autoresindependientes;
+package Auth; // Ensure this matches your package structure
 
 public interface Encriptador {
 
-	static String encriptar(String texto) {
-		
-		if (texto == null) {
-	        return null;
-	    }
-		
+    static String encriptar(String texto) {
+        if (texto == null) {
+            return null;
+        }
+
         StringBuilder resultado = new StringBuilder();
         for (char c : texto.toCharArray()) {
             if (Character.isLetter(c)) {
@@ -30,4 +29,5 @@ public interface Encriptador {
         }
         return resultado.toString();
     }
+
 }
