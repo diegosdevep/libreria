@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import autoresindependientes.Cliente;
 import autoresindependientes.Owner;
 import autoresindependientes.Usuario;
 import autoresindependientes.AutorMenu.Autor;
@@ -74,7 +75,7 @@ public class Registro extends JFrame {
         JLabel lblRol = new JLabel("Rol:");
         lblRol.setBounds(76, 265, 80, 25);
         getContentPane().add(lblRol);
-        String[] roles = {"autor", "editor", "owner"};
+        String[] roles = {"cliente","autor", "editor", "owner"};
         cmbRol = new JComboBox<>(roles);
         cmbRol.setBounds(157, 259, 261, 37);
         getContentPane().add(cmbRol);
@@ -115,6 +116,13 @@ public class Registro extends JFrame {
 
         Usuario nuevoUsuario = null;
         switch (rol) {
+	        case "cliente":
+	            nuevoUsuario = new Cliente(0, nombre, email, password);
+	            Usuario.RegistrarUsuario(nuevoUsuario);
+	            JOptionPane.showMessageDialog(this, "Usuario Cliente registrado exitosamente. Ya puedes iniciar sesión.", "Registro Exitoso", JOptionPane.INFORMATION_MESSAGE);
+	            Registro.this.dispose();
+	            loginFrame.setVisible(true);
+	            break;
             case "autor":
                 nuevoUsuario = new Autor(0, nombre, email, password, null);
                 Registro.this.dispose();

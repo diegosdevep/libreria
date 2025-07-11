@@ -64,6 +64,9 @@ public abstract class Usuario implements Encriptador {
                 String rol = rs.getString("rol");
 
                 switch (rol) {
+	                case "cliente":
+	                    usuario = new Cliente(id, nombre, email, password);
+	                    break;
                     case "autor":
                         String genero = rs.getString("genero_autor");
                         usuario = new Autor(id, nombre, email, password, genero);
@@ -101,6 +104,9 @@ public abstract class Usuario implements Encriptador {
                 String passFromDB = rs.getString("password");
 
                 switch (rol) {
+	                case "cliente":
+	                    usuario = new Cliente(id, nombre, email, passFromDB);
+	                    break;
                     case "autor":
                         String genero = rs.getString("genero_autor");
                         usuario = new Autor(id, nombre, email, passFromDB, genero);
@@ -246,6 +252,10 @@ public abstract class Usuario implements Encriptador {
                 String rol = rs.getString("rol");
 
                 switch (rol) {
+	                case "cliente":
+	                    usuarios.add(new Cliente(id, name, email, password));
+	                    break;
+
                     case "autor":
                         String genero = rs.getString("genero_autor");
                         usuarios.add(new Autor(id, name, email, password, genero));

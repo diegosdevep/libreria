@@ -109,7 +109,33 @@ public class Autor extends Usuario {
         return null;
     }
 
+    public int obtenerVentasAutor() {
+        int totalVentas = 0;
 
+        String sql = "SELECT COUNT(*) AS total " +
+                     "FROM cliente_libros_comprados clc " +
+                     "JOIN libros l ON clc.libro_id = l.id " +
+                     "WHERE l.id_autor = ?";
+
+        try (java.sql.Connection conn = Conexion.getInstance().getConnection();
+             java.sql.PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, this.getId());
+
+            try (java.sql.ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    totalVentas = rs.getInt("total");
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return totalVentas;
+    }
+
+    
     @Override
     public String toString() {
         return super.toString() + ", Autor [género que escribe=" + generoAutor + "]";

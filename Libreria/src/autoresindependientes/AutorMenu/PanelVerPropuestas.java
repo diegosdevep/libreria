@@ -30,6 +30,13 @@ public class PanelVerPropuestas extends JPanel {
     public void cargarPropuestas() {
         lista.removeAll();
 
+        int ventas = autor.obtenerVentasAutor();
+        JLabel lblVentas = new JLabel("Total de libros vendidos: " + ventas);
+        lblVentas.setFont(new Font("Arial", Font.BOLD, 16));
+        lblVentas.setForeground(new Color(0, 102, 204));
+        lblVentas.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
+        lista.add(lblVentas);
+
         List<Propuesta> propuestas = autor.obtenerPropuestasDesdeBD();
 
         if (propuestas.isEmpty()) {
@@ -50,15 +57,15 @@ public class PanelVerPropuestas extends JPanel {
 
                 switch (p.getEstado()) {
                     case ACEPTADA:
-                        lblEstado.setBackground(new Color(144, 238, 144));
+                        lblEstado.setBackground(new Color(144, 238, 144)); 
                         lblEstado.setForeground(Color.BLACK);
                         break;
                     case EN_REVISION:
-                        lblEstado.setBackground(new Color(255, 255, 204));
+                        lblEstado.setBackground(new Color(255, 255, 204)); 
                         lblEstado.setForeground(Color.BLACK);
                         break;
                     case RECHAZADA:
-                        lblEstado.setBackground(new Color(255, 160, 160));
+                        lblEstado.setBackground(new Color(255, 160, 160)); 
                         lblEstado.setForeground(Color.BLACK);
                         break;
                     default:

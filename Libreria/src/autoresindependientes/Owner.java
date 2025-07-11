@@ -2,6 +2,8 @@ package autoresindependientes;
 
 import javax.swing.JOptionPane;
 
+import autoresindependientes.DataBase.Conexion;
+
 
 public class Owner extends Usuario {
 
@@ -50,6 +52,28 @@ public class Owner extends Usuario {
             return false;
         }
     }
+    
+    public int obtenerTotalLibrosVendidos() {
+        int totalVentas = 0;
+
+        String sql = "SELECT COUNT(*) AS total " +
+                     "FROM cliente_libros_comprados";
+
+        try (java.sql.Connection conn = Conexion.getInstance().getConnection();
+             java.sql.PreparedStatement stmt = conn.prepareStatement(sql);
+             java.sql.ResultSet rs = stmt.executeQuery()) {
+
+            if (rs.next()) {
+                totalVentas = rs.getInt("total");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return totalVentas;
+    }
+
 
 
 
